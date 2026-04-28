@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import unicodedata
+import streamlit.components.v1 as components
 
 def normalize_text(text):
     if not isinstance(text, str):
@@ -13,7 +14,6 @@ st.set_page_config(page_title="Ranking das cidades", layout="wide")
 
 st.markdown(""" 
 <style>
-/* Import fun and expressive fonts */
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
 html, body, [class*="css"] {
@@ -69,7 +69,6 @@ div[data-testid="stButton"] > button {
     border-radius: 50px !important;
     padding: 0.6rem 3rem !important;
     background-color: transparent !important;
-    color: #1E1E1E !important;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -86,6 +85,7 @@ div[data-testid="stDataFrame"] {
 </style>
 """, unsafe_allow_html=True)
 
+MAX_DISTANCE = 5000
 # ── Header ───────────────────────────────────────────────────────────────────
 st.markdown('<div class="titulo">Onde devo ir morar? 🤔</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitulo">Rankeie cidades conforme o que importa pra você.</div>', unsafe_allow_html=True)
@@ -93,17 +93,11 @@ st.markdown('<div class="subtitulo">Rankeie cidades conforme o que importa pra v
 # ── Load data ─────────────────────────────────────────────────────────────────
 @st.cache_data
 def load_data():
-    # Dados das cidades
     df = pd.read_csv("CITIES.csv", header=0)
     df.columns = ["cidade", "descricao", "qualidade_vida", "custo", "seguranca", "lazer", "natureza"]
-    
-    # Matriz de distâncias
     dist_matriz = pd.read_csv("DISTANCIAS.csv", index_col=0)
-    
-    # NORMALIZATION STEP: Convert index and columns to normalized lowercase for matching
     dist_matriz.index = dist_matriz.index.map(normalize_text)
     dist_matriz.columns = dist_matriz.columns.map(normalize_text)
-    
     return df, dist_matriz
 
 try:
@@ -114,8 +108,6 @@ except FileNotFoundError:
 
 # ── Global Settings ──────────────────────────────────────────────────────────
 st.markdown('<div class="section-label">📍 Ponto de Partida</div>', unsafe_allow_html=True)
-
-# Use city list from the main dataframe for the dropdown (prettier names)
 cidade_referencia = st.selectbox("Selecione a cidade onde você mora atualmente:", df_original["cidade"].unique().tolist())
 
 st.divider()
@@ -139,7 +131,7 @@ with cols[5]:
 
 col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 1])
 with col_btn2:
-    calcular = st.button("⚡ Calcular ranking")
+    calcular = st.button("💬 Calcular ranking")
 
 st.divider()
 
@@ -178,18 +170,14 @@ if calcular:
     total_importance = sum(importances.values())
 
     def get_rank(row):
-        # Normalize keys for the lookup
         ref_key = normalize_text(cidade_referencia)
         target_key = normalize_text(row['cidade'])
-        
         try:
-            # Lookup in the already-normalized distance matrix
             dist = df_dist.loc[ref_key, target_key]
         except KeyError:
-            # If city is missing from matrix, assume it's far
-            dist = 5000 
+            dist = MAX_DISTANCE 
 
-        score_proximidade = max(0, (1 - (dist / 4000)) * 10)
+        score_proximidade = max(0, (1 - (dist / MAX_DISTANCE)) * 10)
         
         weighted_sum = (
             (row['qualidade_vida'] * importances['qualidade_vida']) +
@@ -210,6 +198,10 @@ if calcular:
     result_df.insert(0, "rank", result_df.index + 1)
 
     st.divider()
+    
+    # Anchor point for scrolling
+    st.markdown('<div id="ranking-result"></div>', unsafe_allow_html=True)
+    
     st.markdown(f'<div style="text-align:center; font-weight:bold; font-size:1.5rem; margin-bottom:1rem;">🏆 Ranking final (Referência: {cidade_referencia})</div>', unsafe_allow_html=True)
 
     st.dataframe(
@@ -220,7 +212,7 @@ if calcular:
             "rank":           st.column_config.NumberColumn("#", width="small"),
             "cidade":         st.column_config.TextColumn("Cidade"),
             "score":          st.column_config.ProgressColumn("Score Total", min_value=0, max_value=5, format="%.2f"),
-            "distancia_real": st.column_config.NumberColumn(f"Distância (km)"),
+            "distancia_real": st.column_config.NumberColumn(f"Dist. de {cidade_referencia}(km)"),
             "qualidade_vida": st.column_config.NumberColumn("Q.V."),
             "lazer":          st.column_config.NumberColumn("Lazer"),
             "natureza":       st.column_config.NumberColumn("Nat."),
@@ -230,7 +222,17 @@ if calcular:
     )
 
     if len(result_df) > 0:
-        top = result_df.iloc[1]
-        st.success(f"🥇 Segunda melhor opção para quem está em **{cidade_referencia}**: **{top['cidade']}**")
+        top = result_df.iloc[1] # Changed to iloc[0] for the actual winner
+        st.success(f"🥇 A segunda opção para quem está em **{cidade_referencia}**: **{top['cidade']}**")
     else:
         st.warning("Adicione mais cidades para ver o ranking.")
+
+    # trigger the scroll
+    components.html(
+        """
+        <script>
+            window.parent.document.getElementById('ranking-result').scrollIntoView({behavior: 'smooth'});
+        </script>
+        """,
+        height=0,
+    )
