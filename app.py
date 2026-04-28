@@ -3,7 +3,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Em quais cidades morar?", layout="wide")
 
-st.markdown("""
+st.markdown(""" 
 <style>
 /* Import fun and expressive fonts */
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
