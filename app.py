@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="Em quais cidades morar?", layout="wide")
+st.set_page_config(page_title="Ranking das cidades", layout="wide")
 
 st.markdown(""" 
 <style>
@@ -87,7 +87,7 @@ div[data-testid="stDataFrame"] {
 """, unsafe_allow_html=True)
 
 # ── Header ───────────────────────────────────────────────────────────────────
-st.markdown('<div class="titulo">Em quais cidades morar?</div>', unsafe_allow_html=True)
+st.markdown('<div class="titulo">Onde devo ir morar? 🤔</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitulo">Rankeie cidades conforme o que importa pra você.</div>', unsafe_allow_html=True)
 
 # ── Load data ─────────────────────────────────────────────────────────────────
