@@ -137,7 +137,7 @@ st.divider()
 
 # ── Editable table ────────────────────────────────────────────────────────────
 st.markdown('<div class="section-label">Tabela de cidades</div>', unsafe_allow_html=True)
-st.caption("Valores gerados pela média da análise de 4 IAs (Gemini, Grok, Chatgpt, Claude). Você pode editá-los antes de calcular.")
+st.caption("Valores da análise combinada de 4 IAs (Gemini, Grok, Chatgpt, Claude). Você pode editá-los antes de calcular.")
 
 edited_df = st.data_editor(
     df_original,
