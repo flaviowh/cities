@@ -1,32 +1,32 @@
 Cidade,Frase Descritiva,Qualidade de Vida,Custo de Vida (10=Barato),Segurança,Lazer,Natureza
-Aracaju,"Capital com ""jeito de interior"" e orla muito organizada.",8,7,5,8,8
-Belém,Rica cultura gastronômica e portão de entrada da Amazônia.,6,6,3,9,8
-Belo Horizonte,"A capital dos botecos, cercada por montanhas e cultura.",8,4,5,10,5
-Boa Vista,"Cidade planejada em leque, com clima pacato no extremo norte.",7,6,4,6,6
-Brasília,Modernismo arquitetônico e qualidade de vida no Planalto Central.,8,2,5,9,6
-Campo Grande,Cidade arborizada com forte presença da fauna pantaneira.,8,6,6,8,8
-Cuiabá,Calor intenso e proximidade com a exuberante Chapada dos Guimarães.,6,6,4,7,8
-Curitiba,"Referência em urbanismo, parques e transporte público.",9,4,6,10,7
-Florianópolis,"A ""Ilha da Magia"" une modernidade a praias paradisíacas.",9,3,7,9,10
-Fortaleza,Metrópole vibrante com praias famosas e ventos constantes.,7,6,3,10,9
-Foz do Iguaçu,"Lar das Cataratas, com atmosfera cosmopolita e de fronteira.",8,7,5,8,10
-Goiânia,Capital do agronegócio com muitos parques e vida sertaneja.,8,7,5,9,6
-João Pessoa,"Onde o sol nasce primeiro, com orla preservada e custo justo.",9,8,6,8,10
-Macapá,Única capital cortada pela Linha do Equador e banhada pelo Amazonas.,5,7,3,5,7
-Maceió,"Possui o mar mais bonito do Brasil, assemelhando-se ao Caribe.",7,7,3,8,10
-Manaus,"O coração da floresta, entre a modernidade industrial e a selva.",6,6,3,9,9
-Montes Claros,Importante polo regional no norte de Minas com clima quente.,6,8,5,6,4
-Natal,"A cidade do sol, famosa pelas dunas de Genipabu e Ponta Negra.",8,7,4,8,10
-Palmas,"A mais jovem capital do país, planejada e com praias de rio.",7,7,5,7,8
-Palmeira dos Índios,"Cidade histórica do agreste alagoano, terra de Graciliano Ramos.",5,9,5,5,4
-Porto Alegre,Polo cultural do sul com o tradicional pôr do sol no Guaíba.,7,4,3,9,6
-Porto Velho,Cidade marcada pelo ciclo da borracha às margens do Rio Madeira.,5,6,3,6,6
-Recife,"Veneza brasileira, rica em história, frevo e belas pontes.",7,6,2,10,8
-Rio Branco,Tranquilidade amazônica na fronteira com Peru e Bolívia.,6,7,3,6,6
-Rio de Janeiro,"A Cidade Maravilhosa, com beleza geográfica inigualável no mundo.",7,2,2,10,10
-Salvador,"Berço da cultura brasileira, com energia única e axé.",7,6,2,10,9
-S. J. dos Campos,Polo tecnológico e aeronáutico com alto padrão de vida.,9,4,7,9,6
-São Luís,Ilha do reggae com arquitetura colonial e azulejos históricos.,6,7,3,8,8
-São Paulo,"O motor econômico do país, onde tudo acontece 24 horas por dia.",8,1,4,10,3
-Teresina,"Única capital nordestina fora do litoral, conhecida como Cidade Verde.",6,8,4,7,5
-Vitória,"Capital insular organizada, com belas paisagens e boa infraestrutura.",9,5,6,9,8
+Aracaju,,7,7,6,6,7
+Belém,,5,6,4,6,8
+Belo Horizonte,,8,6,6,8,7
+Boa Vista,,6,7,5,5,8
+Brasília,,8,5,6,7,7
+Campo Grande,,7,7,6,6,8
+Cuiabá,,6,6,5,6,7
+Curitiba,,9,6,7,8,7
+Florianópolis,,9,5,8,8,9
+Fortaleza,,7,6,4,8,8
+Foz do Iguaçu,,8,6,7,7,9
+Goiânia,,7,7,6,7,7
+João Pessoa,,8,7,7,7,9
+Macapá,,5,7,5,5,8
+Maceió,,7,7,5,7,9
+Manaus,,6,6,5,7,9
+Montes Claros,,6,8,6,5,6
+Natal,,8,7,6,7,9
+Palmas,,7,6,7,6,7
+Palmeira dos Índios,,6,8,6,5,7
+Porto Alegre,,8,6,6,8,7
+Porto Velho,,5,7,5,5,8
+Recife,,7,6,4,8,8
+Rio Branco,,6,7,6,5,8
+Rio de Janeiro,,7,4,4,10,10
+Salvador,,7,6,4,9,9
+S. J. dos Campos,,9,5,8,7,7
+São Luís,,6,7,5,7,9
+São Paulo,,8,3,5,10,6
+Teresina,,6,8,6,6,6
+Vitória,,9,5,7,7,8
