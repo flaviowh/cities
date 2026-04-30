@@ -284,8 +284,8 @@ if calcular:
     )
 
     if len(result_df) > 0:
-        top = result_df.iloc[1]
-        st.success(f"🥈 A segunda opção para quem está em **{cidade_referencia}**: **{top['cidade']}**")
+        top = result_df.iloc[0]
+        st.success(f"🥇 A melhor opção no seu caso é: **{top['cidade']}**")
     else:
         st.warning("Adicione mais cidades para ver o ranking.")
 
