@@ -160,6 +160,68 @@ edited_df = st.data_editor(
 if calcular:
     importances = {
         "qualidade_vida": w_qv,
+        "lazer": w_lazer,
+        "natureza": w_nat,
+        "custo": w_custo,
+        "seguranca": w_seg,
+        "proximidade": w_dist,
+    }
+   
+    total_importance = sum(importances.values())
+    
+    # Métricas que serão normalizadas (excluindo proximidade)
+    metrics = ["qualidade_vida", "lazer", "natureza", "custo", "seguranca"]
+    
+    # Calcula min e max uma única vez
+    stats = edited_df[metrics].agg(['min', 'max'])
+    
+    def get_rank(row):
+        # --- Proximidade ---
+        ref_key = normalize_text(cidade_referencia)
+        target_key = normalize_text(row['cidade'])
+        
+        try:
+            dist = df_dist.loc[ref_key, target_key]
+        except KeyError:
+            dist = MAX_DISTANCE
+            
+        score_proximidade = max(0, (1 - (dist / MAX_DISTANCE)) * 10)
+
+        # --- Normalização Min-Max para cada métrica ---
+        weighted_sum = 0.0
+        
+        for m in metrics:
+            val = row[m]
+            min_val = stats.loc['min', m]
+            max_val = stats.loc['max', m]
+            
+            if max_val == min_val:
+                norm_value = 5.0
+            else:
+                norm_value = 10 * (val - min_val) / (max_val - min_val)
+            
+            weighted_sum += norm_value * importances[m]
+        
+        # Adiciona proximidade
+        weighted_sum += score_proximidade * importances['proximidade']
+        
+        final_score = weighted_sum / total_importance
+        
+        return round(final_score, 2), dist
+
+    # --- Aplicação e ordenação ---
+    result_df = edited_df.copy()
+    
+    # Aplica a função e desempacota os resultados
+    result_df[['score', 'distancia_real']] = result_df.apply(
+        lambda row: pd.Series(get_rank(row)), axis=1
+    )
+    
+    # Ordena e adiciona ranking
+    result_df = result_df.sort_values("score", ascending=False).reset_index(drop=True)
+    result_df.insert(0, "rank", result_df.index + 1)
+    importances = {
+        "qualidade_vida": w_qv,
         "lazer":          w_lazer,
         "natureza":       w_nat,
         "custo":          w_custo,
