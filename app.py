@@ -139,7 +139,7 @@ with cols[5]:
 with cols[6]:
     # User selects the label
     selection = st.selectbox(
-        "Temp", 
+        "Temperatura", 
         options=list(heat_options.keys()), 
         index=1 
     )
