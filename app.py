@@ -94,7 +94,7 @@ st.markdown('<div class="subtitulo">Rankeie cidades conforme o que importa pra v
 @st.cache_data
 def load_data():
     df = pd.read_csv("CITIES.csv", header=0)
-    df.columns = ["cidade", "descricao", "qualidade_vida", "custo", "seguranca", "lazer", "natureza"]
+    df.columns = ["cidade", "descricao", "qualidade_vida", "custo", "seguranca", "lazer", "natureza", "tempMediaAnual"]
     dist_matriz = pd.read_csv("DISTANCIAS.csv", index_col=0)
     dist_matriz.index = dist_matriz.index.map(normalize_text)
     dist_matriz.columns = dist_matriz.columns.map(normalize_text)
@@ -102,6 +102,8 @@ def load_data():
 
 try:
     df_original, df_dist = load_data()
+    min_temp = df_original['tempMediaAnual'].min()
+    max_temp = df_original['tempMediaAnual'].max()
 except FileNotFoundError:
     st.error("Arquivos 'CITIES.csv' ou 'DISTANCIAS.csv' não encontrados.")
     st.stop()
@@ -115,7 +117,7 @@ st.divider()
 # ── Weights form ──────────────────────────────────────────────────────────────
 st.markdown('<div class="section-label">🎛️ O que importa pra você? (1 = pouco, 5 = muito)</div>', unsafe_allow_html=True)
 
-cols = st.columns(6)
+cols = st.columns(7)
 with cols[0]:
     w_qv    = st.number_input("Qualidade Vida",  min_value=0, max_value=5, value=1, step=1)
 with cols[1]:
@@ -128,6 +130,8 @@ with cols[4]:
     w_seg   = st.number_input("Segurança",       min_value=0, max_value=5, value=1, step=1)
 with cols[5]:
     w_dist  = st.number_input(f"Prox. de {cidade_referencia}", min_value=0, max_value=5, value=1, step=1)
+with cols[6]:
+    w_heat   = st.number_input("Temperatura (5 = mais quente)",       min_value=1, max_value=5, value=1, step=1)
 
 col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 1])
 with col_btn2:
@@ -150,6 +154,7 @@ edited_df = st.data_editor(
         "natureza":       st.column_config.NumberColumn("Natureza", min_value=0, max_value=10),
         "custo":          st.column_config.NumberColumn("Custo", min_value=0, max_value=10),
         "seguranca":      st.column_config.NumberColumn("Segurança", min_value=0, max_value=10),
+        "tempMediaAnual": st.column_config.NumberColumn("TempMediaAnual", min_value=0, max_value=50),
         "descricao":      st.column_config.TextColumn("Descrição"),
     },
     hide_index=True,
@@ -157,6 +162,33 @@ edited_df = st.data_editor(
 )
 
 # ── Ranking Logic ─────────────────────────────────────────────────────────────
+
+
+
+def get_rank(row):
+    total_importance = sum(importances.values())
+    ref_key = normalize_text(cidade_referencia)
+    target_key = normalize_text(row['cidade'])
+    try:
+        dist = df_dist.loc[ref_key, target_key]
+    except KeyError:
+        dist = MAX_DISTANCE 
+
+    score_proximidade = max(0, (1 - (dist / MAX_DISTANCE)) * 10)
+    temp_val = (row["tempMediaAnual"] - min_temp) / (max_temp - min_temp) * 10
+    score_temp =  temp_val if w_heat  >= 3 else - temp_val
+    weighted_sum = (
+        (row['qualidade_vida'] * importances['qualidade_vida']) +
+        (row['lazer'] * importances['lazer']) +
+        (row['natureza'] * importances['natureza']) +
+        (row['custo'] * importances['custo']) +
+        (row['seguranca'] * importances['seguranca']) +
+        (score_proximidade * importances['proximidade']) +
+        score_temp
+    )
+    return weighted_sum / total_importance, dist
+
+
 if calcular:
     importances = {
         "qualidade_vida": w_qv,
@@ -169,45 +201,6 @@ if calcular:
    
     total_importance = sum(importances.values())
     
-    # Métricas que serão normalizadas (excluindo proximidade)
-    metrics = ["qualidade_vida", "lazer", "natureza", "custo", "seguranca"]
-    
-    # Calcula min e max uma única vez
-    stats = edited_df[metrics].agg(['min', 'max'])
-    
-    def get_rank(row):
-        # --- Proximidade ---
-        ref_key = normalize_text(cidade_referencia)
-        target_key = normalize_text(row['cidade'])
-        
-        try:
-            dist = df_dist.loc[ref_key, target_key]
-        except KeyError:
-            dist = MAX_DISTANCE
-            
-        score_proximidade = max(0, (1 - (dist / MAX_DISTANCE)) * 10)
-
-        # --- Normalização Min-Max para cada métrica ---
-        weighted_sum = 0.0
-        
-        for m in metrics:
-            val = row[m]
-            min_val = stats.loc['min', m]
-            max_val = stats.loc['max', m]
-            
-            if max_val == min_val:
-                norm_value = 5.0
-            else:
-                norm_value = 10 * (val - min_val) / (max_val - min_val)
-            
-            weighted_sum += norm_value * importances[m]
-        
-        # Adiciona proximidade
-        weighted_sum += score_proximidade * importances['proximidade']
-        
-        final_score = weighted_sum / total_importance
-        
-        return round(final_score, 2), dist
 
     # --- Aplicação e ordenação ---
     result_df = edited_df.copy()
@@ -227,29 +220,10 @@ if calcular:
         "custo":          w_custo,
         "seguranca":      w_seg,
         "proximidade":    w_dist,
+        "temp": 1,
     }
     
-    total_importance = sum(importances.values())
 
-    def get_rank(row):
-        ref_key = normalize_text(cidade_referencia)
-        target_key = normalize_text(row['cidade'])
-        try:
-            dist = df_dist.loc[ref_key, target_key]
-        except KeyError:
-            dist = MAX_DISTANCE 
-
-        score_proximidade = max(0, (1 - (dist / MAX_DISTANCE)) * 10)
-        
-        weighted_sum = (
-            (row['qualidade_vida'] * importances['qualidade_vida']) +
-            (row['lazer'] * importances['lazer']) +
-            (row['natureza'] * importances['natureza']) +
-            (row['custo'] * importances['custo']) +
-            (row['seguranca'] * importances['seguranca']) +
-            (score_proximidade * importances['proximidade'])
-        )
-        return weighted_sum / total_importance, dist
 
     result_df = edited_df.copy()
     res_apply = result_df.apply(get_rank, axis=1)
