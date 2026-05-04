@@ -86,6 +86,12 @@ div[data-testid="stDataFrame"] {
 """, unsafe_allow_html=True)
 
 MAX_DISTANCE = 5000
+
+heat_options = {
+    "Frio": 0,
+    "Indiferente": 1,
+    "Quente": 2
+}
 # ── Header ───────────────────────────────────────────────────────────────────
 st.markdown('<div class="titulo">Onde devo ir morar? 🤔</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitulo">Rankeie cidades conforme o que importa pra você.</div>', unsafe_allow_html=True)
@@ -131,7 +137,12 @@ with cols[4]:
 with cols[5]:
     w_dist  = st.number_input(f"Prox. de {cidade_referencia}", min_value=0, max_value=5, value=1, step=1)
 with cols[6]:
-    w_heat   = st.number_input("Temperatura (5 = mais quente)",       min_value=1, max_value=5, value=1, step=1)
+    # User selects the label
+    selection = st.selectbox(
+        "Temp", 
+        options=list(heat_options.keys()), 
+        index=1 
+    )
 
 col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 1])
 with col_btn2:
@@ -174,17 +185,25 @@ def get_rank(row):
     except KeyError:
         dist = MAX_DISTANCE 
 
-    score_proximidade = max(0, (1 - (dist / MAX_DISTANCE)) * 10)
+    distance_score = max(0, (1 - (dist / MAX_DISTANCE)) * 10)
+
+    w_heat = heat_options[selection]
     temp_val = (row["tempMediaAnual"] - min_temp) / (max_temp - min_temp) * 10
-    score_temp =  temp_val if w_heat  >= 3 else - temp_val
+    temp_score =  temp_val if w_heat  == 2 else - temp_val
+
+    # indifference test
+    if w_heat == 1:
+        temp_score = 0
+        total_importance -= 1
+    
     weighted_sum = (
         (row['qualidade_vida'] * importances['qualidade_vida']) +
         (row['lazer'] * importances['lazer']) +
         (row['natureza'] * importances['natureza']) +
         (row['custo'] * importances['custo']) +
         (row['seguranca'] * importances['seguranca']) +
-        (score_proximidade * importances['proximidade']) +
-        score_temp
+        (distance_score * importances['proximidade']) +
+        temp_score
     )
     return weighted_sum / total_importance, dist
 
