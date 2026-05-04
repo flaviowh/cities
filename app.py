@@ -117,17 +117,17 @@ st.markdown('<div class="section-label">🎛️ O que importa pra você? (1 = po
 
 cols = st.columns(6)
 with cols[0]:
-    w_qv    = st.number_input("Qualidade Vida",  min_value=1, max_value=5, value=1, step=1)
+    w_qv    = st.number_input("Qualidade Vida",  min_value=0, max_value=5, value=1, step=1)
 with cols[1]:
-    w_lazer = st.number_input("Lazer",           min_value=1, max_value=5, value=1, step=1)
+    w_lazer = st.number_input("Lazer",           min_value=0, max_value=5, value=1, step=1)
 with cols[2]:
-    w_nat   = st.number_input("Natureza",        min_value=1, max_value=5, value=1, step=1)
+    w_nat   = st.number_input("Natureza",        min_value=0, max_value=5, value=1, step=1)
 with cols[3]:
-    w_custo = st.number_input("Custo (Barato)",  min_value=1, max_value=5, value=1, step=1)
+    w_custo = st.number_input("Custo (Barato)",  min_value=0, max_value=5, value=1, step=1)
 with cols[4]:
-    w_seg   = st.number_input("Segurança",       min_value=1, max_value=5, value=1, step=1)
+    w_seg   = st.number_input("Segurança",       min_value=0, max_value=5, value=1, step=1)
 with cols[5]:
-    w_dist  = st.number_input(f"Prox. de {cidade_referencia}", min_value=1, max_value=5, value=1, step=1)
+    w_dist  = st.number_input(f"Prox. de {cidade_referencia}", min_value=0, max_value=5, value=1, step=1)
 
 col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 1])
 with col_btn2:
