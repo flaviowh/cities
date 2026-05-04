@@ -1,32 +1,32 @@
-Cidade,Frase Descritiva,Qualidade de Vida,Custo de Vida (10=Barato),Segurança,Lazer,Natureza
-Aracaju,"Capital com ""jeito de interior"" e orla muito organizada.",7.0,7.5,6.0,6.5,7.2
-Belém,Rica cultura gastronômica e portão de entrada da Amazônia.,5.0,6.5,3.8,6.5,8.0
-Belo Horizonte,"A capital dos botecos, cercada por montanhas e cultura.",7.5,5.5,5.5,8.2,6.0
-Boa Vista,"Cidade planejada em leque, com clima pacato no extremo norte.",5.8,7.0,5.2,5.0,7.0
-Brasília,Modernismo arquitetônico e qualidade de vida no Planalto Central.,8.0,4.0,6.2,7.5,6.5
-Campo Grande,Cidade arborizada com forte presença da fauna pantaneira.,7.2,6.8,6.5,6.2,7.5
-Cuiabá,Calor intenso e proximidade com a exuberante Chapada dos Guimarães.,5.8,6.2,5.0,5.8,7.5
-Curitiba,"Referência em urbanismo, parques e transporte público.",8.8,5.2,7.2,8.5,7.0
-Florianópolis,"A ""Ilha da Magia"" une modernidade a praias paradisíacas.",8.8,4.2,8.0,8.2,9.2
-Fortaleza,Metrópole vibrante com praias famosas e ventos constantes.,6.2,6.2,4.0,8.0,8.0
-Foz do Iguaçu,"Lar das Cataratas, com atmosfera cosmopolita e de fronteira.",7.0,6.8,6.0,7.2,9.8
-Goiânia,Capital do agronegócio com muitos parques e vida sertaneja.,7.2,6.8,5.8,7.2,6.2
-João Pessoa,"Onde o sol nasce primeiro, com orla preservada e custo justo.",7.5,7.5,6.2,7.0,8.8
-Macapá,Única capital cortada pela Linha do Equador e banhada pelo Amazonas.,4.2,7.0,4.2,4.5,7.8
-Maceió,"Possui o mar mais bonito do Brasil, assemelhando-se ao Caribe.",6.2,7.0,4.2,6.8,9.0
-Manaus,"O coração da floresta, entre a modernidade industrial e a selva.",5.5,5.8,4.2,7.0,9.0
-Montes Claros,Importante polo regional no norte de Minas com clima quente.,5.8,8.0,5.8,5.0,5.5
-Natal,"A cidade do sol, famosa pelas dunas de Genipabu e Ponta Negra.",7.2,7.0,5.2,7.2,9.0
-Palmas,"A mais jovem capital do país, planejada e com praias de rio.",6.8,7.0,6.8,5.8,7.8
-Palmeira dos Índios,"Cidade histórica do agreste alagoano, terra de Graciliano Ramos.",5.0,8.8,5.5,4.2,5.5
-Porto Alegre,Polo cultural do sul com o tradicional pôr do sol no Guaíba.,7.2,5.0,5.2,8.0,6.5
-Porto Velho,Cidade marcada pelo ciclo da borracha às margens do Rio Madeira.,4.5,6.5,4.2,4.8,7.8
-Recife,"Veneza brasileira, rica em história, frevo e belas pontes.",6.2,6.0,3.8,8.2,7.5
-Rio Branco,Tranquilidade amazônica na fronteira com Peru e Bolívia.,5.0,7.2,4.8,4.5,7.5
-Rio de Janeiro,"A Cidade Maravilhosa, com beleza geográfica inigualável no mundo.",6.8,3.5,3.8,9.5,9.2
-Salvador,"Berço da cultura brasileira, com energia única e axé.",6.5,6.0,3.8,8.5,8.5
-S. J. dos Campos,Polo tecnológico e aeronáutico com alto padrão de vida.,8.2,5.0,7.8,7.0,6.2
-São Luís,Ilha do reggae com arquitetura colonial e azulejos históricos.,5.2,7.0,4.2,6.5,7.8
-São Paulo,"O motor econômico do país, onde tudo acontece 24 horas por dia.",7.8,2.8,5.2,9.8,5.0
-Teresina,"Única capital nordestina fora do litoral, conhecida como Cidade Verde.",5.5,7.8,5.2,5.8,5.8
-Vitória,"Capital insular organizada, com belas paisagens e boa infraestrutura.",8.5,5.2,7.0,7.5,8.0
+Cidade,Frase Descritiva,Qualidade de Vida,Custo de Vida (10=Barato),Segurança,Lazer,Natureza,TempMediaAnual
+Aracaju,"Capital com ""jeito de interior"" e orla muito organizada.",7.0,7.5,6.0,6.5,7.2,26.0
+Belém,Rica cultura gastronômica e portão de entrada da Amazônia.,5.0,6.5,3.8,6.5,8.0,26.0
+Belo Horizonte,"A capital dos botecos, cercada por montanhas e cultura.",7.5,5.5,5.5,8.2,6.0,21.1
+Boa Vista,"Cidade planejada em leque, com clima pacato no extremo norte.",5.8,7.0,5.2,5.0,7.0,26.8
+Brasília,Modernismo arquitetônico e qualidade de vida no Planalto Central.,8.0,4.0,6.2,7.5,6.5,21.1
+Campo Grande,Cidade arborizada com forte presença da fauna pantaneira.,7.2,6.8,6.5,6.2,7.5,23.0
+Cuiabá,Calor intenso e proximidade com a exuberante Chapada dos Guimarães.,5.8,6.2,5.0,5.8,7.5,26.0
+Curitiba,"Referência em urbanismo, parques e transporte público.",8.8,5.2,7.2,8.5,7.0,17.4
+Florianópolis,"A ""Ilha da Magia"" une modernidade a praias paradisíacas.",8.8,4.2,8.0,8.2,9.2,20.4
+Fortaleza,Metrópole vibrante com praias famosas e ventos constantes.,6.2,6.2,4.0,8.0,8.0,26.5
+Foz do Iguaçu,"Lar das Cataratas, com atmosfera cosmopolita e de fronteira.",7.0,6.8,6.0,7.2,9.8,20.9
+Goiânia,Capital do agronegócio com muitos parques e vida sertaneja.,7.2,6.8,5.8,7.2,6.2,23.5
+João Pessoa,"Onde o sol nasce primeiro, com orla preservada e custo justo.",7.5,7.5,6.2,7.0,8.8,26.5
+Macapá,Única capital cortada pela Linha do Equador e banhada pelo Amazonas.,4.2,7.0,4.2,4.5,7.8,27.0
+Maceió,"Possui o mar mais bonito do Brasil, assemelhando-se ao Caribe.",6.2,7.0,4.2,6.8,9.0,25.5
+Manaus,"O coração da floresta, entre a modernidade industrial e a selva.",5.5,5.8,4.2,7.0,9.0,27.0
+Montes Claros,Importante polo regional no norte de Minas com clima quente.,5.8,8.0,5.8,5.0,5.5,23.5
+Natal,"A cidade do sol, famosa pelas dunas de Genipabu e Ponta Negra.",7.2,7.0,5.2,7.2,9.0,26.0
+Palmas,"A mais jovem capital do país, planejada e com praias de rio.",6.8,7.0,6.8,5.8,7.8,27.0
+Palmeira dos Índios,"Cidade histórica do agreste alagoano, terra de Graciliano Ramos.",5.0,8.8,5.5,4.2,5.5,23.0
+Porto Alegre,Polo cultural do sul com o tradicional pôr do sol no Guaíba.,7.2,5.0,5.2,8.0,6.5,19.0
+Porto Velho,Cidade marcada pelo ciclo da borracha às margens do Rio Madeira.,4.5,6.5,4.2,4.8,7.8,25.6
+Recife,"Veneza brasileira, rica em história, frevo e belas pontes.",6.2,6.0,3.8,8.2,7.5,26.2
+Rio Branco,Tranquilidade amazônica na fronteira com Peru e Bolívia.,5.0,7.2,4.8,4.5,7.5,24.5
+Rio de Janeiro,"A Cidade Maravilhosa, com beleza geográfica inigualável no mundo.",6.8,3.5,3.8,9.5,9.2,23.8
+Salvador,"Berço da cultura brasileira, com energia única e axé.",6.5,6.0,3.8,8.5,8.5,25.3
+S. J. dos Campos,Polo tecnológico e aeronáutico com alto padrão de vida.,8.2,5.0,7.8,7.0,6.2,19.5
+São Luís,Ilha do reggae com arquitetura colonial e azulejos históricos.,5.2,7.0,4.2,6.5,7.8,27.0
+São Paulo,"O motor econômico do país, onde tudo acontece 24 horas por dia.",7.8,2.8,5.2,9.8,5.0,19.2
+Teresina,"Única capital nordestina fora do litoral, conhecida como Cidade Verde.",5.5,7.8,5.2,5.8,5.8,28.0
+Vitória,"Capital insular organizada, com belas paisagens e boa infraestrutura.",8.5,5.2,7.0,7.5,8.0,23.1
