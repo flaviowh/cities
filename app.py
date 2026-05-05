@@ -157,7 +157,7 @@ st.caption("Valores da análise combinada de 4 IAs (Gemini, Grok, Chatgpt, Claud
 edited_df = st.data_editor(
     df_original,
     width='content',
-    num_rows="dynamic",
+    num_rows='fixed',
     column_config={
         "cidade":         st.column_config.TextColumn("Cidade"),
         "qualidade_vida": st.column_config.NumberColumn("Q.V.", min_value=0, max_value=10),
